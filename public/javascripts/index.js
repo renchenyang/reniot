@@ -249,11 +249,11 @@ $(document).ready(function() {
                 humidityData.shift();
             }
 
-            avgtemp.update();
+            /*avgtemp.update();
             avghumid.update();
             avgnoise.update();
             avglux.update();
-            avgindex.update();
+            avgindex.update();*/
 
             myLineChart.update();
             myLineChart2.update();
