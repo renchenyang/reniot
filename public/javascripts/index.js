@@ -196,6 +196,7 @@ $(document).ready(function() {
         options: basicOption3
     });
 
+document.getElementById("avgtemp").innerHTML = temperatureData.length;
     if (temperatureData.length != 0) {
         /*var avgtemp = document.getElementById("avgtemp").innerHTML ;
         avgtemp= temperatureSum / temperatureData.length;
@@ -203,7 +204,7 @@ $(document).ready(function() {
         var avgnoise = document.getElementById("avgnoise").innerHTML = noiceSum / noiceData.length;
         var avglux = document.getElementById("avglux").innerHTML = luxSum / luxData.length;
         var avgindex = document.getElementById("avgindex").innerHTML = indexSum / indexData.length;*/
-        document.getElementById("avgtemp").innerHTML = temperatureSum / temperatureData.length;
+        //document.getElementById("avgtemp").innerHTML = temperatureSum / temperatureData.length;
         document.getElementById("avghumid").innerHTML = humiditySum / humidityData.length;
         document.getElementById("avgnoise").innerHTML = noiceSum / noiceData.length;
         document.getElementById("avglux").innerHTML = luxSum / luxData.length;
