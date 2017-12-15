@@ -197,12 +197,17 @@ $(document).ready(function() {
     });
 
     if (temperatureData.length != 0) {
-        var avgtemp = document.getElementById("avgtemp");
-        avgtemp.innerHTML = temperatureSum / temperatureData.length;
+        /*var avgtemp = document.getElementById("avgtemp").innerHTML ;
+        avgtemp= temperatureSum / temperatureData.length;
         var avghumid = document.getElementById("avghumid").innerHTML = humiditySum / humidityData.length;
         var avgnoise = document.getElementById("avgnoise").innerHTML = noiceSum / noiceData.length;
         var avglux = document.getElementById("avglux").innerHTML = luxSum / luxData.length;
-        var avgindex = document.getElementById("avgindex").innerHTML = indexSum / indexData.length;
+        var avgindex = document.getElementById("avgindex").innerHTML = indexSum / indexData.length;*/
+        document.getElementById("avgtemp").innerHTML = temperatureSum / temperatureData.length;
+        document.getElementById("avghumid").innerHTML = humiditySum / humidityData.length;
+        document.getElementById("avgnoise").innerHTML = noiceSum / noiceData.length;
+        document.getElementById("avglux").innerHTML = luxSum / luxData.length;
+        document.getElementById("avgindex").innerHTML = indexSum / indexData.length;
     }
     var ws = new WebSocket('wss://' + location.host);
     ws.onopen = function() {
@@ -258,6 +263,12 @@ $(document).ready(function() {
             myLineChart.update();
             myLineChart2.update();
             myLineChart3.update();
+
+            avgtemp.update();
+            avghumid.update();
+            avgnoise.update();
+            avglux.update();
+            avgindex.update();
 
 
 
