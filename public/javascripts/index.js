@@ -48,8 +48,8 @@ $(document).ready(function() {
             },
             {
                 fill: false,
-                label: 'Noice',
-                yAxisID: 'Noice',
+                label: 'Noise',
+                yAxisID: 'Noise',
                 borderColor: "rgba(24, 120, 240, 1)",
                 pointBoarderColor: "rgba(24, 120, 240, 1)",
                 backgroundColor: "rgba(24, 120, 240, 0.4)",
@@ -144,7 +144,7 @@ $(document).ready(function() {
     var basicOption3 = {
         title: {
             display: true,
-            text: 'heartrate & Sleep Quality Index Real-time Data',
+            text: 'Heartrate & Sleep Quality Index Real-time Data',
             fontSize: 36
         },
         scales: {
@@ -205,6 +205,8 @@ $(document).ready(function() {
             noiceData.push(obj.noice);
             heartrateData.push(obj.heartrate);
             luxData.push(obj.lux);
+            var tempindex=15.5 / (16 + obj.noice * 5 + obj.lux / 100 + Math.abs(obj.temperature - 16) / 10 + Math.abs(obj.humidity - 45 ) / 10) * 50; 
+            indexData.push(tempindex);
             
             //indexData.push(obj.index);
             // only keep no more than 50 points in the line chart
@@ -221,8 +223,7 @@ $(document).ready(function() {
             if (humidityData.length > maxLen) {
                 humidityData.shift();
             }
-            var tempindex=15.5 / (16 + obj.noice * 5 + obj.lux / 100 + Math.abs(obj.temperature - 16) / 10 + Math.abs(obj.humidity - 45 ) / 10) * 50; 
-            indexData.push(tempindex);
+            
 
             myLineChart.update();
             myLineChart2.update();
