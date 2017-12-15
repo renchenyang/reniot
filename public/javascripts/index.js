@@ -1,4 +1,11 @@
 $(document).ready(function() {
+    var timeSum = 0,
+        temperatureSum = 0,
+        humiditySum = 0,
+        noiceSum = 0,
+        heartrateSum = 0,
+        luxSum = 0,
+        indexSum = 0;
     var timeData = [],
         temperatureData = [],
         humidityData = [],
@@ -189,6 +196,13 @@ $(document).ready(function() {
         options: basicOption3
     });
 
+
+    var avgtemp = document.getElementById("avgtemp").innerHTML = temperatureSum / temperatureData.length;
+    var avghumid = document.getElementById("avghumid").innerHTML = humiditySum / humidityData.length;
+    var avgnoise = document.getElementById("avgnoise").innerHTML = noiceSum / noiceData.length;
+    var avglux = document.getElementById("avglux").innerHTML = luxSum / luxData.length;
+    var avgindex = document.getElementById("avgindex").innerHTML = indexSum / indexData.length;
+
     var ws = new WebSocket('wss://' + location.host);
     ws.onopen = function() {
         console.log('Successfully connect WebSocket');
@@ -202,10 +216,15 @@ $(document).ready(function() {
             }
             timeData.push(obj.time);
             temperatureData.push(obj.temperature);
+            temperatureSum += obj.temperature;
             noiceData.push(obj.noice);
+            noiceSum += obj.noice;
             heartrateData.push(obj.heartrate);
+            heartrateSum += obj.heartrate;
             luxData.push(obj.lux);
-            var tempindex = 15.5 / (16 + obj.noice * 5 + obj.lux / 100 + Math.abs(obj.temperature - 16) / 10 + Math.abs(obj.humidity - 45) / 10) * 50;
+            luxSum += obj.lux;
+
+            var tempindex = 1750 / (16 + obj.noice * 5 + obj.lux / 100 + Math.abs(obj.temperature - 16) / 10 + Math.abs(obj.humidity - 45) / 10);
             indexData.push(tempindex);
 
             //indexData.push(obj.index);
@@ -223,15 +242,24 @@ $(document).ready(function() {
 
             if (obj.humidity) {
                 humidityData.push(obj.humidity);
+                humiditySum += obj.humidity;
             }
             if (humidityData.length > maxLen) {
                 humidityData.shift();
             }
 
+            avgtemp.update();
+            avghumid.update();
+            avgnoise.update();
+            avglux.update();
+            avgindex.update();
 
             myLineChart.update();
             myLineChart2.update();
             myLineChart3.update();
+
+
+
         } catch (err) {
             console.error(err);
         }
