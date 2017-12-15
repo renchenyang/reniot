@@ -196,14 +196,14 @@ $(document).ready(function() {
         options: basicOption3
     });
 
-
-    var avgtemp = document.getElementById("avgtemp");
-    avgtemp.innerHTML = temperatureSum / temperatureData.length;
-    var avghumid = document.getElementById("avghumid").innerHTML = humiditySum / humidityData.length;
-    var avgnoise = document.getElementById("avgnoise").innerHTML = noiceSum / noiceData.length;
-    var avglux = document.getElementById("avglux").innerHTML = luxSum / luxData.length;
-    var avgindex = document.getElementById("avgindex").innerHTML = indexSum / indexData.length;
-
+    if (temperatureData.length != 0) {
+        var avgtemp = document.getElementById("avgtemp");
+        avgtemp.innerHTML = temperatureSum / temperatureData.length;
+        var avghumid = document.getElementById("avghumid").innerHTML = humiditySum / humidityData.length;
+        var avgnoise = document.getElementById("avgnoise").innerHTML = noiceSum / noiceData.length;
+        var avglux = document.getElementById("avglux").innerHTML = luxSum / luxData.length;
+        var avgindex = document.getElementById("avgindex").innerHTML = indexSum / indexData.length;
+    }
     var ws = new WebSocket('wss://' + location.host);
     ws.onopen = function() {
         console.log('Successfully connect WebSocket');
