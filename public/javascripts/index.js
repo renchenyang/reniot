@@ -197,7 +197,8 @@ $(document).ready(function() {
     });
 
 
-    var avgtemp = document.getElementById("avgtemp").innerHTML = temperatureSum / temperatureData.length;
+    var avgtemp = document.getElementById("avgtemp");
+    avgtemp.innerHTML = temperatureSum / temperatureData.length;
     var avghumid = document.getElementById("avghumid").innerHTML = humiditySum / humidityData.length;
     var avgnoise = document.getElementById("avgnoise").innerHTML = noiceSum / noiceData.length;
     var avglux = document.getElementById("avglux").innerHTML = luxSum / luxData.length;
