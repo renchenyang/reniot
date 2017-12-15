@@ -117,7 +117,7 @@ $(document).ready(function() {
     var basicOption2 = {
         title: {
             display: true,
-            text: 'Lux & Noice Real-time Data',
+            text: 'Lux & Noise Real-time Data',
             fontSize: 36
         },
         scales: {
@@ -130,10 +130,10 @@ $(document).ready(function() {
                 },
                 position: 'left',
             }, {
-                id: 'Noice',
+                id: 'Noise',
                 type: 'linear',
                 scaleLabel: {
-                    labelString: 'Noice',
+                    labelString: 'Noise',
                     display: true
                 },
                 position: 'right'
@@ -205,8 +205,7 @@ $(document).ready(function() {
             noiceData.push(obj.noice);
             heartrateData.push(obj.heartrate);
             luxData.push(obj.lux);
-            var tempindex=15.5 / (16 + tempnoice * 5 + templux / 100 + Math.abs(temptemp - 16) / 10 + Math.abs(temphumid - 45 ) / 10) * 50; 
-            indexData.push(tempindex);
+            
             //indexData.push(obj.index);
             // only keep no more than 50 points in the line chart
             const maxLen = 50;
@@ -222,6 +221,8 @@ $(document).ready(function() {
             if (humidityData.length > maxLen) {
                 humidityData.shift();
             }
+            var tempindex=15.5 / (16 + obj.noice * 5 + obj.lux / 100 + Math.abs(obj.temperature - 16) / 10 + Math.abs(obj.humidity - 45 ) / 10) * 50; 
+            indexData.push(tempindex);
 
             myLineChart.update();
             myLineChart2.update();
