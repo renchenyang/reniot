@@ -144,7 +144,7 @@ $(document).ready(function() {
     var basicOption3 = {
         title: {
             display: true,
-            text: 'heartrate & Index Real-time Data',
+            text: 'heartrate & Sleep Quality Index Real-time Data',
             fontSize: 36
         },
         scales: {
@@ -205,7 +205,9 @@ $(document).ready(function() {
             noiceData.push(obj.noice);
             heartrateData.push(obj.heartrate);
             luxData.push(obj.lux);
-            indexData.push(obj.index);
+            var tempindex=15.5 / (16 + tempnoice * 5 + templux / 100 + Math.abs(temptemp - 16) / 10 + Math.abs(temphumid - 45 ) / 10) * 50; 
+            indexData.push(tempindex);
+            //indexData.push(obj.index);
             // only keep no more than 50 points in the line chart
             const maxLen = 50;
             var len = timeData.length;
