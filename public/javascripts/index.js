@@ -264,10 +264,12 @@ $(document).ready(function() {
             document.getElementById("avgnoise").innerHTML = "avgnoise:" + noiceSum / noiceData.length;
             document.getElementById("avglux").innerHTML = "avglux:" + luxSum / luxData.length;
             document.getElementById("avgindex").innerHTML = "avgindex:" + indexSum / indexData.length;
-
-
-
             document.getElementById("state").innerHTML = "current sleep state:" + state;
+
+            if (obj.lux>1500) {
+              window.alert("Could you please help this sleeping person close the light?");
+            }
+            
 
             myLineChart.update();
             myLineChart2.update();
