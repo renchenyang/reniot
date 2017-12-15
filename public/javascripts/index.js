@@ -205,9 +205,9 @@ $(document).ready(function() {
             noiceData.push(obj.noice);
             heartrateData.push(obj.heartrate);
             luxData.push(obj.lux);
-            var tempindex=15.5 / (16 + obj.noice * 5 + obj.lux / 100 + Math.abs(obj.temperature - 16) / 10 + Math.abs(obj.humidity - 45 ) / 10) * 50; 
+            var tempindex = 15.5 / (16 + obj.noice * 5 + obj.lux / 100 + Math.abs(obj.temperature - 16) / 10 + Math.abs(obj.humidity - 45) / 10) * 50;
             indexData.push(tempindex);
-            
+
             //indexData.push(obj.index);
             // only keep no more than 50 points in the line chart
             const maxLen = 50;
@@ -215,6 +215,10 @@ $(document).ready(function() {
             if (len > maxLen) {
                 timeData.shift();
                 temperatureData.shift();
+                noiceData.shift();
+                heartrateData.shift();
+                luxData.shift();
+                indexData.shift();
             }
 
             if (obj.humidity) {
@@ -223,7 +227,7 @@ $(document).ready(function() {
             if (humidityData.length > maxLen) {
                 humidityData.shift();
             }
-            
+
 
             myLineChart.update();
             myLineChart2.update();
