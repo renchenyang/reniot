@@ -218,9 +218,26 @@ $(document).ready(function() {
             luxSum += obj.lux;
 
             var tempindex = 1750 / (16 + obj.noice * 5 + obj.lux / 100 + Math.abs(obj.temperature - 16) / 10 + Math.abs(obj.humidity - 45) / 10);
-            indexData.push(tempindex);
+            var state = "N/A";
+            if (tempindex > 100) {
+                tempindex = 100;
+            }
+            if (tempindex < 0) {
+                tempindex = 0;
+            }
+            if (tempindex < 33) {
+                state = "bad";
+            }
+            if (tempindex >= 33 && tempindex <= 66) {
+                state = "medium";
+            }
+            if (tempindex > 66) {
+                state = "good";
+            }
 
-            //indexData.push(obj.index);
+            indexData.push(tempindex);
+            indexSum += tempindex;
+
             // only keep no more than 50 points in the line chart
             const maxLen = 50;
             var len = timeData.length;
@@ -241,38 +258,20 @@ $(document).ready(function() {
                 humidityData.shift();
             }
 
-            /*avgtemp.update();
-            avghumid.update();
-            avgnoise.update();
-            avglux.update();
-            avgindex.update();*/
 
-            if (temperatureData.length != 0) {
-                /*var avgtemp = document.getElementById("avgtemp").innerHTML ;
-                avgtemp= temperatureSum / temperatureData.length;
-                var avghumid = document.getElementById("avghumid").innerHTML = humiditySum / humidityData.length;
-                var avgnoise = document.getElementById("avgnoise").innerHTML = noiceSum / noiceData.length;
-                var avglux = document.getElementById("avglux").innerHTML = luxSum / luxData.length;
-                var avgindex = document.getElementById("avgindex").innerHTML = indexSum / indexData.length;*/
-                //document.getElementById("avgtemp").innerHTML = temperatureSum / temperatureData.length;
-                document.getElementById("avghumid").innerHTML = humiditySum / humidityData.length;
-                document.getElementById("avgnoise").innerHTML = noiceSum / noiceData.length;
-                document.getElementById("avglux").innerHTML = luxSum / luxData.length;
-                document.getElementById("avgindex").innerHTML = indexSum / indexData.length;
-            }
+            document.getElementById("avgtemp").innerHTML = "avgtemp:" + temperatureSum / temperatureData.length;
+            document.getElementById("avghumid").innerHTML = "avghumid:" + humiditySum / humidityData.length;
+            document.getElementById("avgnoise").innerHTML = "avgnoise:" + noiceSum / noiceData.length;
+            document.getElementById("avglux").innerHTML = "avglux:" + luxSum / luxData.length;
+            document.getElementById("avgindex").innerHTML = "avgindex:" + indexSum / indexData.length;
+
+
+
+            document.getElementById("state").innerHTML = "current sleep state:" + state;
 
             myLineChart.update();
             myLineChart2.update();
             myLineChart3.update();
-
-            avgtemp.update();
-            avghumid.update();
-            avgnoise.update();
-            avglux.update();
-            avgindex.update();
-
-
-
         } catch (err) {
             console.error(err);
         }
